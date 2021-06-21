@@ -1,0 +1,40 @@
+body {
+    background-image: url(https://i.pinimg.com/originals/57/60/b5/5760b517141320cf72ff205fc611a668.jpg);
+}
+.container{
+    padding-top: 5px;
+    padding-left: 250px;
+    
+}
+.registration {
+    color: black;
+} 
+
+.login{
+    padding-left: 60px;
+    color:black;
+}
+
+.img {
+    display: flex;
+    justify-content: flex-end;
+    width: 75%;
+}
+
+label {
+    float: left;
+    width: 100px;
+}
+
+h1 {
+    color: black;
+}
+
+p {
+    color:white;
+}
+
+img {
+    padding-left: 520px;
+    padding-top: 60px;
+}

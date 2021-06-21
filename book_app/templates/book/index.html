@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'book/style.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome {{users_info.first_name}}, </h1>
+        <a href="/book/logout">Log Out</a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="add book" class="col">
+                <h2>Add a Favorite Book</h2>
+            {% if messages %}
+                <ul class="messages">    
+                    {% for message in messages %}    
+                        <li>{{ message }}</li>    
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <div class="row align-items-start">
+                <form action="/book/create" method="POST">
+                    {% csrf_token %}
+                    <div class="col">
+                        <label for="title" id="title">Title</label>
+                        <input type="text" name="title" id="title">
+                    </div>
+                    <div class="col">
+                        <label for="description" id="description">Description</label>
+                        <textarea name="description" id="description" cols="30" rows="2"></textarea>
+                    </div>
+                    <button class="btn btn-outline-primary">Add</button>
+                </form>
+            </div>
+            </div>
+
+            <div class="display books" class="col">
+                <h2>All Books</h2>
+                {% for book in all_books %}
+                    <h6>
+                        <a href="/book/{{book.id}}">{{book.title}}</a>
+                    </h6>
+                    <p>(add by {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}})</p>
+                    <p>{{book.description}}</p>
+                    {% if users_info.id == book.uploaded_by.id %}
+                        <a href="/book/edit/{{book.id}}">Edit</a>
+                    {% endif %}
+                {% endfor %}
+                    
+            </div>
+        </div>
+    </div>
+</body>
+</html>

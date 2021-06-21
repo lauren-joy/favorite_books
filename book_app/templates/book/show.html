@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'book/style.css' %}">
+    <title>Book Info</title>
+</head>
+<body>
+    <div class="header">
+        <h2>Welcome {{users_info.first_name}}</h2>
+        <a href="/book/logout"> Log Out</a>
+    </div>
+    <div class="infomation">
+        <h3>{{book_info.title}}</h3>
+        <p>Added by: {{book_info.uploaded_by.first_name}} {{book_info.uploaded_by.last_name}}</p>
+        <p>Added on: {{book_info.created_at}}</p>
+        <p>Last updated on: {{book_info.updated_at}}</p>
+        <p>Description: {{book_info.description}}</p>
+    </div>
+
+    <div class="user likes">
+        <h3>Users Who like this Book</h3>
+        <ul>
+        {% for user in book_info.users_who_like.all %}
+            <li>{{user.first_name}} {{user.last_name}}</li>
+        {% endfor %}
+        </ul>
+        <form action="/book/favorite/{{book_info.id}}" method="POST">
+            {% csrf_token %}
+            <button>Add to Favorites</button>
+        </form>
+        
+    </div>
+</body>
+</html>

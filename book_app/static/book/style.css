@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.display_books {
+    margin-left: 20px;
+}
+
+label {
+    float: left;
+    width: 100px;
+    font-weight: bold;
+}
